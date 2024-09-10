@@ -3,15 +3,17 @@ import { z } from "zod";
 
 export const env = createEnv({
     server: {
-        DATABASE_URL: z.string().url().refine((value) => value.includes('postgres'), {
-            message: 'DATABASE_URL must contain postgres',
-        }),
+        APP_ENV: z.enum(["development", "test", "production"]).refine(
+            (value) => value !== undefined,
+            {
+                message: "APP_ENV é obrigatório",
+            }
+        ),
     },
     client: {
     },
-
-    runtimeEnv: {
-        DATABASE_URL: process.env.DATABASE_URL,
+    experimental__runtimeEnv: {
+        APP_ENV: process.env.APP_ENV,
     },
-
+    emptyStringAsUndefined: true,
 });
