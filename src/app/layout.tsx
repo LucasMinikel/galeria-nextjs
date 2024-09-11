@@ -28,8 +28,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <TopBar />
         {children}
       </body>
     </html>
+  );
+}
+
+function TopBar() {
+  return (
+    <nav className="text-white p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-xl font-bold">Logo</div>
+        <div className="text-sm">Usuário</div>
+      </div>
+    </nav>
   );
 }
